@@ -8,7 +8,6 @@ module TICTACTOE-SYNTAX
     syntax Cell ::= "cell" Int Int
     syntax Turn ::= Player Int Int
     syntax Player ::= "w" | "b"
-    syntax Val ::= "e" | Player
 endmodule
 
 module TICTACTOE
@@ -20,9 +19,9 @@ module TICTACTOE
         <turn>w</turn>
         <winner>.</winner>
         <square multiplicity="*">
-            <x>0</x>
-            <y>0</y>
-            <v>e</v>
+            <x>.</x>
+            <y>.</y>
+            <v>.</v>
         </square>
     </T>
 
@@ -41,14 +40,14 @@ module TICTACTOE
          <k> column X => column (X -Int 1); ~> cell X (H -Int 1); ...</k>
              when X >Int 0
     rule <k> cell X 0 => . ...</k>
-         (. => <square> <x> X </x> <y> 0 </y> <v> e </v> </square>)
+         (. => <square> <x> X </x> <y> 0 </y> <v> . </v> </square>)
     rule <k> cell X Y => cell X (Y -Int 1) ...</k>
-         (. => <square> <x> X </x> <y> Y </y> <v> e </v> </square>)
+         (. => <square> <x> X </x> <y> Y </y> <v> . </v> </square>)
             when Y >Int 0
 
     rule <turn> P => swap(P) </turn>
          <k> P X Y => . ...</k>
-         <square> <x> X </x> <y> Y </y> <v> e => P</v> </square>
+         <square> <x> X </x> <y> Y </y> <v> . => P</v> </square>
 
     rule <square> <x> X </x> <v> P </v> ...</square>
          <square> <x> X </x> <v> P </v> ...</square>
