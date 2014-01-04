@@ -14,8 +14,7 @@ module TICTACTOE
     imports TICTACTOE-SYNTAX
     configuration <T>
         <k color="green">board 3; $PGM:K</k>
-        <width>0</width>
-        <height>0</height>
+        <size>0</size>
         <turn>w</turn>
         <winner>.</winner>
         <square multiplicity="*">
@@ -31,13 +30,12 @@ module TICTACTOE
 
     rule St1:Stmt St2:Stmt => St1 ~> St2
     rule Exp ; => Exp
-    rule <k> board W:Int => column (W -Int 1) ...</k>
-         <width> _ => W </width>
-         <height> _ => W </height>
-    rule <height> H </height>
-         <k> column 0 => cell 0 (H -Int 1); ...</k>
-    rule <height> H </height>
-         <k> column X => column (X -Int 1); ~> cell X (H -Int 1); ...</k>
+    rule <k> board S:Int => column (S -Int 1) ...</k>
+         <size> _ => S </size>
+    rule <size> S </size>
+         <k> column 0 => cell 0 (S -Int 1); ...</k>
+    rule <size> S </size>
+         <k> column X => column (X -Int 1); ~> cell X (S -Int 1); ...</k>
              when X >Int 0
     rule <k> cell X 0 => . ...</k>
          (. => <square> <x> X </x> <y> 0 </y> <v> . </v> </square>)
