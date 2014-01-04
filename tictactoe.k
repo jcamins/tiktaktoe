@@ -25,10 +25,9 @@ module TICTACTOE
         </square>
     </T>
 
-    //rule <k> board W:Int ...</k> => <square> <x> W </x> <y> W </y> </square> <square> <x> W -Int 1 </x> <y> W -Int 1 </y> </square>
-    rule <k> board W:Int => column 0 ...</k> <width> _ => W </width> <height> _ => W </height>
-    rule <k> column X => column X +Int 1 cell X 0 ...</k>
-    rule <k> cell X Y ...</k> => <square> <x> X </x> <y> Y </y> <v> e </v> </square> when Y =Int 0
-    rule <k> cell X Y => cell X Y +Int 1 ...</k> <width> W </width> <square> <x> X </x> <y> Y </y> <v> e </v> </square> when Y <Int W
-    //rule <k> cell X:Int Y:Int => cell X +Int 1 Y ...</k> <square> <x> X </x> <y> Y </y> <v> e </v> </square>
+    rule <k> board W:Int => column W -Int 1 ...</k> <width> _ => W </width> <height> _ => W </height>
+    rule <height> H </height> <k> column 0 => cell 0 (H -Int 1) ...</k>
+    rule <height> H </height> <k> column X => column (X -Int 1) ~> cell X (H -Int 1) ...</k> when X >Int 0
+    rule <k> cell X 0 => . ...</k> (. => <square> <x> X </x> <y> 0 </y> <v> e </v> </square>)
+    rule <k> cell X Y => cell X (Y -Int 1) ...</k> (. => <square> <x> X </x> <y> Y </y> <v> e </v> </square>) when Y >Int 0
 endmodule
