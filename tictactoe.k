@@ -1,7 +1,7 @@
 
 module TICTACTOE-SYNTAX
     syntax Stmt ::= Exp ";" [strict]
-                    | Stmt Stmt [seqstrict]
+                    | Stmt Stmt [strict, left]
     syntax Exp ::= Board | Column | Cell | Turn
     syntax Board ::= "board" Int
     syntax Column ::= "column" Int
