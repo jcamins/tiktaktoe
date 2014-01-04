@@ -18,6 +18,7 @@ module TICTACTOE
         <width>0</width>
         <height>0</height>
         <turn>w</turn>
+        <winner>.</winner>
         <square multiplicity="*">
             <x>0</x>
             <y>0</y>
@@ -49,4 +50,15 @@ module TICTACTOE
          <k> P X Y => . ...</k>
          <square> <x> X </x> <y> Y </y> <v> e => P</v> </square>
 
+    rule <square> <x> X </x> <v> P </v> ...</square>
+         <square> <x> X </x> <v> P </v> ...</square>
+         <square> <x> X </x> <v> P </v> ...</square> <winner> . => P </winner>
+
+    rule <square> <y> Y </y> <v> P </v> ...</square>
+         <square> <y> Y </y> <v> P </v> ...</square>
+         <square> <y> Y </y> <v> P </v> ...</square> <winner> . => P </winner>
+
+    rule <square> <x> N </x> <y> N </y> <v> P </v> ...</square>
+         <square> <x> N </x> <y> N </y> <v> P </v> ...</square>
+         <square> <x> N </x> <y> N </y> <v> P </v> ...</square> <winner> . => P </winner>
 endmodule
