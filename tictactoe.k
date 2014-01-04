@@ -1,9 +1,9 @@
-
 module TICTACTOE-SYNTAX
-    syntax Exp ::= Exp Exp [strict, left] | Board | Column | Cell | Turn
-    syntax Board ::= "board" Int
-    syntax Column ::= "column" Int
-    syntax Cell ::= "cell" Int Int
+    syntax Exp ::= Exp Exp [strict, left]
+                 | "board" Int
+                 | "column" Int
+                 | "cell" Int Int
+                 | Turn
     syntax Turn ::= Player Int Int
     syntax Player ::= "w" | "b"
 endmodule
@@ -25,8 +25,8 @@ module TICTACTOE
     syntax Player ::= "swap" "(" Player ")" [function]
     rule swap(w) => b 
     rule swap(b) => w
-
     rule E1:Exp E2:Exp => E1 ~> E2
+
     rule <k> board S:Int => column (S -Int 1) ...</k>
          <size> _ => S </size>
     rule <size> S </size>
