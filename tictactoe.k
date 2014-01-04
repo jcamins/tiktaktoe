@@ -20,5 +20,5 @@ module TICTACTOE
         </square>
     </T>
 
-    rule <k> board W:Int ...</k> => <square> <x> W </x> <y> W </y> </square>
+    rule <k> board W:Int ...</k> => <square> <x> W </x> <y> W </y> </square> <square> <x> W -Int 1 </x> <y> W -Int 1 </y> </square>
 endmodule
