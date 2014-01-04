@@ -1,8 +1,6 @@
 
 module TICTACTOE-SYNTAX
-    syntax Stmt ::= Exp ";" [strict]
-                    | Stmt Stmt [strict, left]
-    syntax Exp ::= Board | Column | Cell | Turn
+    syntax Exp ::= Exp Exp [strict, left] | Board | Column | Cell | Turn
     syntax Board ::= "board" Int
     syntax Column ::= "column" Int
     syntax Cell ::= "cell" Int Int
@@ -13,7 +11,7 @@ endmodule
 module TICTACTOE
     imports TICTACTOE-SYNTAX
     configuration <T>
-        <k color="green">board 3; $PGM:K</k>
+        <k color="green">board 3 $PGM:K</k>
         <size>0</size>
         <turn>w</turn>
         <winner>.</winner>
@@ -28,14 +26,13 @@ module TICTACTOE
     rule swap(w) => b 
     rule swap(b) => w
 
-    rule St1:Stmt St2:Stmt => St1 ~> St2
-    rule Exp ; => Exp
+    rule E1:Exp E2:Exp => E1 ~> E2
     rule <k> board S:Int => column (S -Int 1) ...</k>
          <size> _ => S </size>
     rule <size> S </size>
-         <k> column 0 => cell 0 (S -Int 1); ...</k>
+         <k> column 0 => cell 0 (S -Int 1) ...</k>
     rule <size> S </size>
-         <k> column X => column (X -Int 1); ~> cell X (S -Int 1); ...</k>
+         <k> column X => column (X -Int 1) ~> cell X (S -Int 1) ...</k>
              when X >Int 0
     rule <k> cell X 0 => . ...</k>
          (. => <square> <x> X </x> <y> 0 </y> <v> . </v> </square>)
