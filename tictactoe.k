@@ -14,7 +14,7 @@ endmodule
 module TICTACTOE
     imports TICTACTOE-SYNTAX
     configuration <T>
-        <k color="green">$PGM:K</k>
+        <k color="green">board 3; $PGM:K</k>
         <width>0</width>
         <height>0</height>
         <turn>w</turn>
@@ -24,6 +24,10 @@ module TICTACTOE
             <v>e</v>
         </square>
     </T>
+
+    syntax Player ::= "swap" "(" Player ")" [function]
+    rule swap(w) => b 
+    rule swap(b) => w
 
     rule St1:Stmt St2:Stmt => St1 ~> St2
     rule Exp ; => Exp
@@ -41,6 +45,8 @@ module TICTACTOE
          (. => <square> <x> X </x> <y> Y </y> <v> e </v> </square>)
             when Y >Int 0
 
-    rule <k> P:Player X Y => . ...</k> <square> <x> X </x> <y> Y </y> <v> _ => P</v> </square>
-    //rule <k> P:Player X Y ...</k> <turn> P => </turn> <square> <x> X </x> <y> Y </y> <v> _ => P </v> </square>
+    rule <turn> P => swap(P) </turn>
+         <k> P X Y => . ...</k>
+         <square> <x> X </x> <y> Y </y> <v> e => P</v> </square>
+
 endmodule
