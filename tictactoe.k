@@ -42,13 +42,16 @@ module TICTACTOE
 
     rule <square> <x> X </x> <v> P </v> ...</square>
          <square> <x> X </x> <v> P </v> ...</square>
-         <square> <x> X </x> <v> P </v> ...</square> <winner> . => P </winner>
+         <square> <x> X </x> <v> P </v> ...</square>
+                  <winner> . => P </winner>
 
     rule <square> <y> Y </y> <v> P </v> ...</square>
          <square> <y> Y </y> <v> P </v> ...</square>
-         <square> <y> Y </y> <v> P </v> ...</square> <winner> . => P </winner>
+         <square> <y> Y </y> <v> P </v> ...</square>
+                  <winner> . => P </winner>
 
     rule <square> <x> N1 </x> <y> N1 </y> <v> P </v> ...</square>
          <square> <x> N2 </x> <y> N2 </y> <v> P </v> ...</square>
-         <square> <x> N3 </x> <y> N3 </y> <v> P </v> ...</square> <winner> . => P </winner>
+         <square> <x> N3 </x> <y> N3 </y> <v> P </v> ...</square>
+                  <winner> . => P </winner>
 endmodule
