@@ -1,4 +1,4 @@
-module TICTACTOE-SYNTAX
+module TIKTAKTOE-SYNTAX
     syntax Exp ::= Exp Exp [strict, left]
                  | "board"
                  | "won"
@@ -9,8 +9,8 @@ module TICTACTOE-SYNTAX
     syntax Player ::= "w" | "b"
 endmodule
 
-module TICTACTOE
-    imports TICTACTOE-SYNTAX
+module TIKTAKTOE
+    imports TIKTAKTOE-SYNTAX
     configuration <T>
         <k color="green">board $PGM:K</k>
         <turn>w</turn>
