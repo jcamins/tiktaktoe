@@ -1,6 +1,7 @@
 module TICTACTOE-SYNTAX
     syntax Exp ::= Exp Exp [strict, left]
                  | "board"
+                 | "wonDiagonal" | "wonRow" | "wonCol"
                  | "column" Int
                  | "cell" Int Int
                  | Turn
@@ -37,21 +38,37 @@ module TICTACTOE
             when Y >Int 0
 
     rule <turn> P => swap(P) </turn>
-         <k> P X Y => . ...</k>
+         <k> P X Y => wonCol ...</k>
          <square> <x> X </x> <y> Y </y> <v> . => P</v> </square>
-
-    rule <square> <x> X </x> <v> P </v> ...</square>
          <square> <x> X </x> <v> P </v> ...</square>
          <square> <x> X </x> <v> P </v> ...</square>
                   <winner> . => P </winner>
 
-    rule <square> <y> Y </y> <v> P </v> ...</square>
+    rule <turn> P => swap(P) </turn>
+         <k> P X Y => wonRow ...</k>
+         <square> <x> X </x> <y> Y </y> <v> . => P</v> </square>
          <square> <y> Y </y> <v> P </v> ...</square>
          <square> <y> Y </y> <v> P </v> ...</square>
                   <winner> . => P </winner>
 
-    rule <square> <x> N1 </x> <y> N1 </y> <v> P </v> ...</square>
-         <square> <x> N2 </x> <y> N2 </y> <v> P </v> ...</square>
-         <square> <x> N3 </x> <y> N3 </y> <v> P </v> ...</square>
+    rule <turn> P => swap(P) </turn>
+         <k> P X Y => wonDiagonal ...</k>
+         <square> <x> X </x> <y> Y </y> <v> . => P</v> </square>
+         <square> <x> X2 </x> <y> Y2 </y> <v> P </v> ...</square>
+         <square> <x> X3 </x> <y> Y3 </y> <v> P </v> ...</square>
                   <winner> . => P </winner>
+                  when (X +Int X2 +Int X3 ==Int 3) andBool (Y +Int Y2 +Int Y3 ==Int 3)
+                    andBool (
+                        (X ==Int Y andBool X ==Int 1) orBool 
+                        (X2 ==Int Y2 andBool X2 ==Int 1) orBool
+                        (X3 ==Int Y3 andBool X3 ==Int 1)
+                    )
+
+    rule <turn> P => swap(P) </turn>
+         <k> P X Y => . ...</k>
+         <square> <x> X </x> <y> Y </y> <v> . => P </v> </square>
+         <square> <x> X </x> <y> Y2 </y> <v> P2 </v> ...</square>
+         <square> <x> X2 </x> <y> Y </y> <v> P3 </v> ...</square>
+                  when X2 =/=Int X andBool Y2 =/=Int Y
+
 endmodule
