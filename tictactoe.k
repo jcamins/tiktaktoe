@@ -43,14 +43,15 @@ module TICTACTOE
          <square> <x> X2 </x> <y> Y2 </y> <v> P </v> ...</square>
          <square> <x> X3 </x> <y> Y3 </y> <v> P </v> ...</square>
                   <winner> . => P </winner>
-                  when ((X +Int X2 +Int X3) %Int 3 ==Int 0) andBool ((Y +Int Y2 +Int Y3) %Int 3 ==Int 0)
-                    andBool (
-                        (X ==Int Y andBool X ==Int 1) orBool 
-                        (X2 ==Int Y2 andBool X2 ==Int 1) orBool
-                        (X3 ==Int Y3 andBool X3 ==Int 1) orBool
-                        (X ==Int X2) orBool
-                        (Y ==Int Y2)
-                    )
+                  when          ((X +Int X2 +Int X3) %Int 3 ==Int 0)
+                        andBool ((Y +Int Y2 +Int Y3) %Int 3 ==Int 0)
+                        andBool (
+                                   (X ==Int Y andBool X ==Int 1)
+                            orBool (X2 ==Int Y2 andBool X2 ==Int 1)
+                            orBool (X3 ==Int Y3 andBool X3 ==Int 1)
+                            orBool (X ==Int X2)
+                            orBool (Y ==Int Y2)
+                        )
 
     rule <turn> P => swap(P) </turn>
          <k> P X Y => . ...</k>
